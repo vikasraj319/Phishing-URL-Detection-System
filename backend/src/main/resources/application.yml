@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: phishguard-ai
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/phishguard}
+    username: ${DB_USER:phishguard}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+  tomcat:
+    max-http-form-post-size: 64KB
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+phishguard:
+  retention-days: ${RETENTION_DAYS:30}
+  detection:
+    suspicious-min: ${SUSPICIOUS_MIN:30}
+    high-risk-min: ${HIGH_RISK_MIN:60}
+  rate-limit:
+    scans-per-minute: ${RATE_LIMIT_SCANS_PER_MIN:30}
+    reads-per-minute: ${RATE_LIMIT_READS_PER_MIN:300}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  intel:
+    timeout-ms: ${INTEL_TIMEOUT_MS:3000}
+    cache-seconds: ${INTEL_CACHE_SECONDS:600}
+    safe-browsing-api-key: ${SAFE_BROWSING_API_KEY:}
+    virus-total-api-key: ${VIRUSTOTAL_API_KEY:}
